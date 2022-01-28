@@ -5,7 +5,7 @@ import time
 def tick():
     global start_sec
     global button_bg
-    time_string = time.strftime("%H:%M:%S %m/%d/%Y")
+    time_string = time.strftime("%H:%M %b/%d/%Y")
     # print(time_string)
     clock.value = time_string
     elapsed_seconds = int(time.time()) - start_sec
@@ -22,7 +22,7 @@ def tick():
     timer.value = str(timer_display)
     if minutes_left < 2:
         if button_bg == "#D3D3D3":
-            button_bg = "#FFCCCB"
+            button_bg = "red"
         else:
             button_bg = "#D3D3D3"
         reset_button.bg = button_bg
@@ -32,13 +32,14 @@ def reset_time():
     global start_sec
     global button_bg
     button_bg = "#D3D3D3"
+    reset_button.bg = button_bg
     print("reset pressed")
     start_sec = int(time.time())
     tick()
 
 app = App(width=800, height=480)
 
-clock = Text(app, size=55, bg="white", text="Time Left: " + time.strftime("%H:%M:%S"), width="fill", height=1)
+clock = Text(app, size=55, bg="white", text="Time Left: " + time.strftime("%H:%M %b/%d/%Y"), width="fill", height=1)
 timer = Text(app, size=55, bg="#90EE90", text="30:00", width="fill", height=2)
 start_sec = int(time.time())
 button_bg = "#D3D3D3"
